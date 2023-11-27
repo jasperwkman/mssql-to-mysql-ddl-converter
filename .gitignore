@@ -1,0 +1,6 @@
+config/db_config.ini
+data/table_list.txt
+.vscode
+__pycache__/
+venv
+output/

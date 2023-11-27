@@ -1,0 +1,36 @@
+#reference :
+#https://dev.mysql.com/doc/workbench/en/wb-migration-database-mssql-typemapping.html
+#change varchar to text if it's length > 1000. to avoid over maximum row size limit 65535
+mssql_to_mysql_map = {
+  'int' : 'int',
+  'tinyint' : 'tinyint',
+  'smallint' : 'smallint',
+  'bigint' : 'bigint',
+  'bit' : 'tinyint(1)',
+  'float' : 'float',
+  'real' : 'float',
+  'numeric' : 'decimal',
+  'decimal' : 'decimal',
+  'money' : 'decimal',
+  'smallmoney' : 'decimal',
+  'char' : 'char,255|text,65535|longtext',
+  'nchar' : 'char,255|text,65535|longtext',
+  'varchar' : 'varchar,1000|text,65535|longtext',
+  'nvarchar' : 'varchar,1000|text,65535|longtext',
+  'date' : 'date',
+  'datetime' : 'datetime(3)',
+  'datetime2' : 'datetime(3)',
+  'smalldatetime' : 'datetime',
+  'datetimeoffset' : 'datetime',
+  'time' : 'time',
+  'timestamp' : 'timestamp',
+  'rowversion' : 'timestamp',
+  'binary' : 'binary:65535|longblob',
+  'varbinary' : 'varbinary:65535|longblob',
+  'text' : 'text:65535|longtext',
+  'ntext' : 'text:65535|longtext',
+  'image' : 'longblob',
+  'uniqueidentifier' : 'varchar(64)',
+  'sysname' : 'varchar(160)',
+  'xml' : 'longtext'
+}
