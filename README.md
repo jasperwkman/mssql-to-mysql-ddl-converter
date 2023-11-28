@@ -52,4 +52,4 @@ table_2
     ```
 
    If you haven't provided a username or password in the configuration file, the script will prompt you for them during runtime.
-
+4. DDL for MySQL will be result in output/output_ddl.sql
