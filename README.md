@@ -11,6 +11,7 @@ The Dataype basicly referenced <a href="https://dev.mysql.com/doc/workbench/en/w
 - Retrieves table and index DDL statements.
 - Converts SQL Server DDL to MySQL-compatible DDL.
 - Generates DDL scripts for specified tables.
+- Support Table, Index, Primary key , Default column value
 
 ## Prerequisites
 
