@@ -2,7 +2,8 @@
 
 ## Overview
 
-The MSSQL to MySQL DDL Converter is a Python application designed to connect to a Microsoft SQL Server, retrieve the table and index Data Definition Language (DDL), and convert it to DDL compatible with MySQL. This tool simplifies the migration process for users looking to transition their database schemas from SQL Server to MySQL.
+This is a Python application designed to connect to a Microsoft SQL Server, retrieve the table and index Data Definition Language (DDL), and convert it to DDL compatible with MySQL.
+I found there are no such free tools to do so, so this tool simplifies the migration process for users looking to transition their database schemas from SQL Server to MySQL.
 The Dataype basicly referenced <a href="https://dev.mysql.com/doc/workbench/en/wb-migration-database-mssql-typemapping.html">MySQL Workbench Manual</a>, plus enhancements.
 
 ## Features
