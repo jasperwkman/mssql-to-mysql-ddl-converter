@@ -1,10 +1,14 @@
 # utils.py
 from .mssql_to_mysql_map import mssql_to_mysql_map
 
+# Function to convert SQL Server data type to MySQL data type
 def convert_sql_type(mssql_type: str, length: int = None, precision: int = 0, data_max_length: int = None) -> str:
+    
+    # Lookup the equivalent MySQL data type
     mysql_type = mssql_to_mysql_map[mssql_type]
     return_type = mysql_type
 
+    # Handle variable length types like varchar
     if mysql_type.find(',') > 0:
         return_type = f'{mysql_type.split(",")[0]}({length})'
         type_config = mysql_type.split(',')
@@ -22,26 +26,28 @@ def convert_sql_type(mssql_type: str, length: int = None, precision: int = 0, da
             return_type = max_type
         else:
             return_type = mysql_type.split(":")[0]
-
+    # Special handling for decimal which needs precision 
     if mysql_type == 'decimal':
         return_type = f'decimal({length},{precision})'
 
     return return_type
 
 def remove_parentheses(s):
+    # Remove surrounding parentheses
     if s.startswith('('):
             s = s[1:]
     if s.endswith(')'):
             s = s[:-1]
     return s
+
 def generate_mysql_create_index_ddl(metadata):
+    # Generate MySQL index DDL statements 
     ddl_statements = {}
     for table_index_name, columns in metadata.items():
         table, index = table_index_name.split(".")
         if columns['PrimaryKey'] == 1:
             ddl_statements[table_index_name] = f"ALTER TABLE {table} ADD CONSTRAINT {index} PRIMARY KEY ({','.join(columns['Columns'])});"
         elif columns['Fulltext'] == 'Yes':
-            #CREATE FULLTEXT INDEX ceo_log_FTIDX on ceo_log(log_subject,log_detail,log_remark);
             ddl_statements[table_index_name] = f"CREATE FULLTEXT INDEX {index} ON {table}({columns['FulltextColumns']});"
         else:
             ddl_statements[table_index_name] = f"CREATE {'UNIQUE' if columns['Unique'] == 1 or columns['Clustered'] == 'CLUSTERED' else ''} INDEX {index} ON {table}({','.join(columns['Columns'])});"
@@ -69,7 +75,6 @@ def generate_mysql_create_table_ddl(metadata,table_pks):
 
             # Create column statement
             column_statement = f"{column_name} {mysql_data_type}"
-            #print(data_type,length,mysql_data_type)
             # Add NOT NULL constraint if the column is not nullable
             if not is_nullable:
                     column_statement += " NOT NULL"

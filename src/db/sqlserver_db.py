@@ -106,7 +106,6 @@ ORDER BY
             rows = cursor.fetchall()
             for row in rows:
                 table_index = f"{row.Table}.{row.Index}"
-                #print(row)
                 if table_index not in result:
                     result[table_index] = {}
                     result[table_index]['Unique'] = row.Unique
@@ -166,7 +165,6 @@ ORDER BY
         result = {}
         for row in rows:
             table = row.Table
-            #print(row)
             if table not in result:
                 result[table] = []
             r = {}
@@ -181,7 +179,6 @@ ORDER BY
             r['DataMaxLength'] = None
             if row.DataType in ['text','ntext','binary','varbinary']:
                 r['DataMaxLength'] = self.get_column_max_length(table,row.Column)
-            #print(row.ColumnDefault)
             result[table].append(r)
 
             
