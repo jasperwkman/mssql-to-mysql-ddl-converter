@@ -54,5 +54,5 @@ table_2
     python your_script_name.py
     ```
 
-   If you haven't provided a username or password in the configuration file, the script will prompt you for them during runtime.
+   You may empty the username / password in the configuration file, the script will prompt you for them during runtime.
 4. DDL for MySQL will be result in output/output_ddl.sql
